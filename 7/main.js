@@ -1,26 +1,3 @@
-
-/*var text = ["Ed", "Edd", "Eddy" ];
-
-
-
-
-
-var ulnode = document.getElementById("mainList")
-
-
-
-for(var i= 0; i<text.length; i++){
-    var liNode= document.createElement("li");
-    liNode.textContent = text[i];
-    liNode.className="list-group-item";
-
-    ulnode.append(liNode);
-
-
-}
-*/
-
-
 function newStudents(firstName, lastname, dni, email) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -39,7 +16,7 @@ var student = {
 
 var liNode = document.getElementById("22999333")
 
-function createStudentNode(newStudent) {
+function StudentNode(newStudent) {
     var liNode = document.createElement("li")
 
     liNode.className = "list-group-item"
