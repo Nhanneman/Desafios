@@ -5,7 +5,7 @@ var number1 = parseInt(prompt("ingresar primer valor"));
 
 do {
     number2 = parseInt(prompt("ingrese segundo valor"));
-  } while (operation === "/" && number2 === 0);
+} while (operation === "/" && number2 === 0);
 
 var result;
 
@@ -27,4 +27,4 @@ switch (operation) {
         break
 };
 
-alert("el resultado es " + result);
+alert(result);
