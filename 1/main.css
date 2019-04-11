@@ -1,0 +1,10 @@
+#listStudents {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#listStudents li {
+    padding: 1em;
+    font-weight: bolder;
+}

@@ -1,6 +1,6 @@
 var gender = prompt("ingresar male,female u other")
 var age = prompt("ingresar edad")
-var mensaje = "hola "
+var mensaje = "hola"
 
 switch (gender) {
     case "male":
@@ -11,7 +11,7 @@ switch (gender) {
         mensaje = mensaje + " Sra"
         break
     case "other":
-        mensaje = mensaje + " Sx"
+        mensaje = mensaje + " Srx"
         break
 }
 

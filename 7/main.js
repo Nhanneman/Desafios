@@ -1,37 +1,31 @@
-function newStudents(firstName, lastname, dni, email) {
+function NewStudents(firstName, lastName, dni, email) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.dni = dni;
     this.email = email;
-
-
 }
-
 var student = {
     firstName: "Juan",
     lastName: "Peréz",
     dni: 22999333,
     email: "juan@gmail.com",
 }
-
 var liNode = document.getElementById("22999333")
 
-function StudentNode(newStudent) {
+
+function createStudentNode(NewStudents) {
     var liNode = document.createElement("li")
-
     liNode.className = "list-group-item"
-
-    liNode.innerHTML =
+    liNode.textContent =
         "<h1>" +
-        newStudent.firstName + newStudents.lastName +
+        NewStudents.firstName + NewStudents.lastName +
         "</h1> <h3> dni:" +
-        newStudent.dni +
+        NewStudents.dni +
         "</h3><p>E-mail:" +
-        newStudent.email +
+        NewStudents.email +
         "</p>"
-
     return liNode
 }
+createStudentNode(student);
 
-console.log(createStudentNode(student));
-
+console.log(student);
