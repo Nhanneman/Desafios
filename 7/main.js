@@ -4,7 +4,7 @@ function NewStudents(firstName, lastName, dni, email) {
     this.dni = dni;
     this.email = email;
 }
-var student = {
+var students = {
     firstName: "Juan",
     lastName: "Peréz",
     dni: 22999333,
@@ -16,16 +16,16 @@ var liNode = document.getElementById("22999333")
 function createStudentNode(NewStudents) {
     var liNode = document.createElement("li")
     liNode.className = "list-group-item"
-    liNode.textContent =
+    liNode.innerHTML =
         "<h1>" +
-        NewStudents.firstName + NewStudents.lastName +
+        students.firstName + students.lastName +
         "</h1> <h3> dni:" +
-        NewStudents.dni +
+        students.dni +
         "</h3><p>E-mail:" +
-        NewStudents.email +
+        students.email +
         "</p>"
     return liNode
 }
-createStudentNode(student);
+createStudentNode(students);
 
-console.log(student);
+console.log(students);
