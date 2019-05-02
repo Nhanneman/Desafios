@@ -1,126 +1,110 @@
-/* FUNCION CONSTRUCTORA */
+/* 1. crear un formulario con nombre y dni (HTML)
+        1a. validar nombre y dni vacio
+        2a. validar dni positivo
+ * 2. permitir ingresar y eliminar alumnos
+ * 3. persistencia en localstorage
+ * 4. se muestra lista 
+*/
 
-function Students(firstName, lastName, dni, email) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.dni = dni;
-    this.email = email;
+/*
+ * 1. Crear objeto alumno
+ * 2. Crear Funcion Constructora Alumno
+ * 3. Crear la funcion que obtiene lista de alumnos (getListaAlumnos)
+ *      a. obtener del localstorage la lista de alumnos
+ *          a1. crear lista vacia
+ *          a2. existe lista? => obtener del ls
+ *          a3. no existe lista? => guardar lista vacia en ls
+ *      b. parsear lista a objeto
+ *      c. devolver lista
+ * 4. Crear la Funcion que agrega un alumno
+ *      a. obtener lista alumnos con funcion getListaAlumnos().
+ *      b. recorrer alumnos para verificar ya si existe
+ *      b. agregar alumno a lista
+ *      c. convertir lista a json
+ *      d. guardar lista en local storage
+ * 
+ * */
+
+studentList = [];
+
+addStudentButton = document.getElementById("addStudentButton");
+addStudentButton.onclick = newStudent;
+
+firstNamenode = document.getElementById("firstName");
+firstNamenode.onblur = validateFields;
+
+lastNamenode = document.getElementById("lastName");
+lastNamenode.onblur = validateFields;
+
+dniNode = document.getElementById("dni");
+dniNode.onblur = validateDnifield;
+
+
+
+function AddStudent(firstName, lastName, dni, email) {
+        this.firstname = firstName;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.email = email;
+
 
 }
+function newStudent() {
+        firstName = document.getElementById("firstName");
+        lastName = document.getElementById("lastName");
+        dni = document.getElementById("dni");
+        email = document.getElementById("email");
 
-function newStudents() {
-    var firstName = document.getElementById("firstName");
-    var lastName = document.getElementById("lastName");
-    var dni = document.getElementById("dni");
-    var email = document.getElementById("email");
-
-    savingStudents(
-        firstName.value,
-        lastName.value,
-        dni.value,
-        email.value);
+        saveStudent(
+                firstName.value,
+                lastName.value,
+                dni.value,
+                email.value,
+        )
 }
-/* LOCAL STORAGE*/
 
+function saveStudent(firstName, lastName, dni, email) {
+        var studentList = [];
+        if (localStorage.getItem("newStudent")) {
+                studentList = JSON.parse(localStorage.getItem("newStudent"));
+        }
+        studentList.push(new AddStudent(firstName, lastName, dni, email));
 
-function savingStudents(firstName, lastName, dni, email) {
-    var studentsList = [];
-    if (localStorage.getItem("students")) {
-        studentsList = JSON.parse(localStorage.getItem("students"));
-    }
-    studentsList.push(new Students(firstName, lastName, dni, email));
-    var studentsJson = JSON.stringify(studentsList);
-    localStorage.setItem("students", studentsJson);
-}
-var students = [];
-
-var addStudentButton = document.getElementById("addStudentButton").disabled = true
-
-
-
-addStudentButton.onclick = newStudents;
-
-
-/* VALIDACION DE CAMPOS */
-
-var firstName = document.getElementById("firstName");
-
-
-firstName.onblur = validatefirstName;
-
-function validatefirstName(event) {
-    var firstName = event.target;
-    console.log(firstName.value);
-    if (
-        !firstName.value ||
-        firstName.value.indexOf("")
-    ) {
-        firstName.classList.remove("is-valid")
-        firstName.classList.add("is-invalid")
-    } else {
-        firstName.classList.remove("is-invalid")
-        firstName.classList.add("is-valid")
-    }
-}
-var lastName = document.getElementById("lastName");
-lastName.onblur = validatelastName;
-
-function validatelastName(event) {
-    var lastName = event.target;
-    console.log(lastName.value);
-
-    if (
-        !lastName.value ||
-        lastName.value.indexOf("")
-    ) {
-        lastName.classList.remove("is-valid")
-        lastName.classList.add("is-invalid")
-    }
-    else {
-        lastName.classList.remove("is-invalid")
-        lastName.classList.add("is-valid")
-    }
+        var listNamejson = JSON.stringify(studentList);
+        localStorage.setItem("newStudent", listNamejson)
 }
 
 
-var dni = document.getElementById("dni");
-dni.onblur = validateDni;
 
-function validateDni(event) {
-    var dni = event.target;
 
-    var dniField;
+function validateFields(events) {
+        var node = events.target
+        if (!node.value ||
+                node.value.indexOf("")
 
-    console.log(dni.value);
+        ) {
+                node.classList.remove("is-valid");
+                node.classList.add("is-invalid");
 
-    dniField = parseInt(dni.value);
+        }
+        else {
+                node.classList.remove("is-invalid");
+                node.classList.add("is-valid");
+        }
 
-    if (isNaN(dniField) || dniField <= 0) {
-        dni.classList.remove("is-valid")
-        dni.classList.add("is-invalid")
-    }
-    else {
-        dni.classList.remove("is-invalid")
-        dni.classList.add("is-valid")
-    }
 }
 
-var email = document.getElementById("email");
-email.onblur = validateEmail
-function validateEmail(event) {
-    var email = event.target;
-    console.log(email.value);
-    if (
-        !email.value ||
-        email.value.indexOf("@") === -1 ||
-        email.value.indexOf(".") === -1 ||
-        email.value.indexOf("com") === -1
-    ) {
-        email.classList.remove("is-valid")
-        email.classList.add("is-invalid")
-    } else {
-        email.classList.remove("is-invalid")
-        email.classList.add("is-valid")
-    }
-}
+function validateDnifield(event) {
+        var dni = event.target;
 
+        dniValue = parseInt(dni.value);
+
+        if (isNaN(dniValue) || dniValue <= 0) {
+                dni.classList.remove("is-valid")
+                dni.classList.add("is-invalid")
+        }
+        else {
+                dni.classList.remove("is-invalid")
+                dni.classList.add("is-valid")
+        }
+}
